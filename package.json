@@ -1,0 +1,9 @@
+{
+  "name": "rosele-painel",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Painel financeiro privado da Rosele Aesthetics",
+  "dependencies": {
+    "@vercel/functions": "3.9.9"
+  }
+}
