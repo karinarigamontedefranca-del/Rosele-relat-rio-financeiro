@@ -4,286 +4,347 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>Painel Financeiro · Rosele Aesthetics</title>
+  <title>Seu plano · Rosele Aesthetics</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="topbar" id="topbar">Painel financeiro privado</div>
+  <div class="topbar">Feito pela Karina, só para você · atualizado em 24/10/2026</div>
   <header class="site">
     <div class="header-in">
-      <a class="brand" href="#" aria-label="Rosele Aesthetics">
+      <a class="brand" href="#inicio" aria-label="Rosele Aesthetics, início">
         <img class="logo" src="logo.png" alt="Rosele Aesthetics" width="216" height="44">
-        <span class="tagline">Painel<br>financeiro</span>
+        <span class="tagline">Seu<br>plano</span>
       </a>
-      <nav class="tabs" role="tablist">
-        <button role="tab" data-page="geral" aria-selected="true">Visão geral</button>
-        <button role="tab" data-page="despesas" aria-selected="false">Fixas × variáveis</button>
-        <button role="tab" data-page="maquina" aria-selected="false">A máquina</button>
-        <button role="tab" data-page="lancamentos" aria-selected="false">Lançamentos</button>
+      <nav class="nav" aria-label="Seções">
+        <a href="#negocio">Seu negócio</a>
+        <a href="#historia">Máquina ou casa</a>
+        <a href="#juntar">Como juntar</a>
+        <a href="#economias">As economias</a>
+        <a href="#plano" class="cta">Gerar meu plano</a>
+        <a href="#perguntas">Perguntas</a>
       </nav>
     </div>
+    <div class="progress" aria-hidden="true"><span id="scroll-progress"></span></div>
   </header>
 
   <main>
-    <!-- ================= VISÃO GERAL ================= -->
-    <section class="page" id="page-geral">
-      <div class="hero">
-        <div class="hero-text">
-          <span class="eyebrow" id="periodo-eyebrow">Jan – Set 2026</span>
-          <h1>Como a clínica está indo, em um só lugar</h1>
-          <p>Tudo o que entrou e saiu nas 4 contas da empresa no QuickBooks: a conta corrente 6216, o Amex Business Gold e os cartões Chase 6346 e 2378. Pagamentos de fatura e transferências entre contas ficam de fora, para nada ser contado duas vezes.</p>
-          <p class="hint" id="hero-note"></p>
+    <!-- ======================= INÍCIO ======================= -->
+    <section class="hero" id="inicio">
+      <div class="wrap hero-in">
+        <div class="hero-text reveal">
+          <span class="eyebrow">Rosele,</span>
+          <h1>Montei este espaço para a gente olhar o seu dinheiro juntas</h1>
+          <p class="lead">Juntei o banco, os cartões e agora também o Vagaro. Descobri uma coisa que muda o plano inteiro: <b>uma parte boa do que você recebe chega em dinheiro vivo e não passa pelo banco.</b> Contando esse dinheiro, a máquina cabe, mesmo com os $5 mil por mês que você precisa para viver.</p>
+          <p class="sign">Com carinho, <span>Karina</span></p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#plano">Gerar meu plano</a>
+            <a class="btn ghost" href="#historia">Ver a história da máquina</a>
+          </div>
         </div>
-        <div class="hero-arch">
-          <div class="lbl">Receita média por mês (abr–set)</div>
-          <div class="big num" id="hero-receita">—</div>
-          <div class="sub" id="hero-sub"></div>
-        </div>
-      </div>
-
-      <div class="grid g4" id="kpis"></div>
-
-      <div class="card mt">
-        <h3>Para onde foi cada US$ 100 que entrou</h3>
-        <p class="hint" id="hundred-hint">Soma de janeiro a setembro. Se a soma passar de 100, a diferença saiu do seu bolso pessoal (faturas do Amex pagas de fora da empresa).</p>
-        <div class="hundred" id="hundred"></div>
-        <div class="hundred-legend" id="hundred-legend"></div>
-      </div>
-
-      <div class="grid g2 mt">
-        <div class="card">
-          <h3>Receita por mês</h3>
-          <p class="hint">Atendimentos recebidos (Vagaro, Square, Cherry e Zelle de clientes).</p>
-          <div class="chart-box"><canvas id="ch-receita" aria-label="Gráfico de receita por mês"></canvas></div>
-        </div>
-        <div class="card">
-          <h3>Lucro da empresa por mês</h3>
-          <p class="hint">Receita menos todas as despesas da clínica (antes de retiradas e impostos). Meses negativos tiveram gastos grandes que não se repetem.</p>
-          <div class="chart-box"><canvas id="ch-lucro" aria-label="Gráfico de lucro por mês"></canvas></div>
+        <div class="hero-arch reveal" aria-hidden="true">
+          <div class="arch-ring"></div>
+          <div class="arch-in">
+            <img src="logo.png" alt="">
+            <div class="arch-stats">
+              <div><b class="count" data-to="18591" data-fmt="usd">$0</b><span>você recebe de verdade<br>por mês</span></div>
+              <div><b class="count" data-to="23" data-fmt="pct">0%</b><span>chega em<br>dinheiro vivo</span></div>
+              <div><b id="hero-quita">dez/27</b><span>a máquina fica paga<br>(cenário realista)</span></div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="grid g2 mt">
-        <div class="card">
-          <h3>Maiores fornecedores</h3>
-          <p class="hint">Quem mais recebeu dinheiro da clínica em 2026 (sem retiradas e gastos pessoais).</p>
-          <div class="chart-box tall"><canvas id="ch-fornec" aria-label="Maiores fornecedores"></canvas></div>
-        </div>
-        <div class="card">
-          <h3>Por conta</h3>
-          <p class="hint">Quanto passou por cada conta (despesas da empresa + gastos pessoais e retiradas).</p>
-          <div class="table-wrap"><table id="tb-contas"></table></div>
-        </div>
-      </div>
+      <a class="scroll-cue" href="#negocio" aria-label="Rolar para baixo"><span></span></a>
     </section>
 
-    <!-- ================= FIXAS x VARIÁVEIS ================= -->
-    <section class="page" id="page-despesas" hidden>
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">Despesas</span>
-          <h2>Fixas × variáveis</h2>
-          <p><b>Fixas</b> são as que vêm todo mês, atendendo muito ou pouco (aluguel, seguro, médica supervisora). <b>Variáveis</b> sobem e descem com o movimento (produtos, assistentes, anúncios). <b>Eventuais</b> são gastos grandes que não se repetem (reforma, viagens, faculdade, equipamento). Não concorda com algum? <b>Arraste o item</b> (ou clique nele) para mudar de coluna: as contas abaixo se refazem na hora.</p>
+    <!-- ======================= SEU NEGÓCIO ======================= -->
+    <section class="sec" id="negocio">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="num-badge">1</span>
+          <div><h2>Seu negócio em 2026</h2>
+          <p>De janeiro a setembro, juntando o que caiu no banco com o dinheiro vivo registrado no Vagaro.</p></div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-end">
-          <div class="seg" role="group" aria-label="Período da média">
-            <button data-avg="abr" aria-pressed="true">Média abr–set</button>
-            <button data-avg="jan" aria-pressed="false">Média jan–set</button>
-          </div>
-          <label class="toggle"><input type="checkbox" id="cash-rent" checked> Somar aluguel pago em dinheiro (estimativa)</label>
-          <button class="btn small" id="reset-tipos">Voltar ao padrão</button>
+        <div class="kpis" id="kpis"></div>
+
+        <div class="grid g-main">
+          <article class="card reveal span2">
+            <div class="card-head">
+              <div><h3>Como você recebe, mês a mês</h3><p class="hint">Cada barra é tudo o que você recebeu no mês. A linha é o que de fato caiu no banco.</p></div>
+              <div class="legend" id="lg-receb"></div>
+            </div>
+            <div class="chart-box"><canvas id="ch-receb" aria-label="Recebimentos por mês e forma de pagamento"></canvas></div>
+            <p class="callout" id="callout-dinheiro"></p>
+          </article>
+          <article class="card reveal">
+            <h3>Formas de pagamento</h3>
+            <p class="hint">Jan a set/2026</p>
+            <div class="donut-box"><canvas id="ch-formas" aria-label="Formas de pagamento"></canvas><div class="donut-center" id="donut-center"></div></div>
+            <div class="legend col" id="lg-formas"></div>
+          </article>
         </div>
-      </div>
 
-      <div class="buckets" id="buckets"></div>
-
-      <div class="grid g3 mt" id="desp-kpis"></div>
-
-      <div class="card mt">
-        <h3>Quanto você precisa faturar para fechar o mês</h3>
-        <p class="hint" id="be-hint"></p>
-        <div class="gauge" id="be-gauge"><div class="fill"></div><div class="mark"><span></span></div></div>
-        <p id="be-text"></p>
-      </div>
-
-      <div class="card mt">
-        <h3>Despesas da empresa por mês</h3>
-        <div class="legend">
-          <span><i style="background:var(--s-fixa)"></i>Fixas</span>
-          <span><i style="background:var(--s-variavel)"></i>Variáveis</span>
-          <span><i style="background:var(--s-eventual)"></i>Eventuais</span>
-          <span><i class="line" style="background:var(--ink)"></i>Receita</span>
-        </div>
-        <div class="chart-box tall"><canvas id="ch-desp" aria-label="Despesas por mês, por tipo"></canvas></div>
-      </div>
-
-      <div class="card mt">
-        <h3>Tabela das despesas</h3>
-        <p class="hint">Valores por mês. "% da receita" compara a média de cada item com a receita média do mesmo período.</p>
-        <div class="table-wrap"><table id="tb-desp"></table></div>
-      </div>
-    </section>
-
-    <!-- ================= MÁQUINA ================= -->
-    <section class="page" id="page-maquina" hidden>
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">Planejamento</span>
-          <h2>A máquina nova: quando e como comprar</h2>
-          <p>Mexa nos controles e veja o que acontece com o dinheiro da clínica nos próximos 24 meses (nov/2026 a out/2028). O plano parte do saldo de hoje na conta 6216, da receita média de abril a setembro e das despesas de hoje.</p>
-        </div>
-      </div>
-
-      <div class="grid g-sim">
-        <aside class="card controls" id="controls">
-          <div class="ctl">
-            <label for="in-preco">Preço da máquina <output id="out-preco"></output></label>
-            <input type="range" id="in-preco" min="3000" max="80000" step="250">
-            <div class="presets">
-              <button class="preset" data-preco="brl">R$ 60 mil</button>
-              <button class="preset" data-preco="60000">US$ 60 mil</button>
-            </div>
-            <div class="help" id="help-preco"></div>
-          </div>
-          <div class="ctl">
-            <label for="in-mes">Mês da compra <output id="out-mes"></output></label>
-            <input type="range" id="in-mes" min="1" max="24" step="1">
-          </div>
-
-          <div class="ctl-group">
-            <h4>Seus hábitos</h4>
-            <div class="presets" style="margin:-4px 0 14px">
-              <button class="preset" data-habito="hoje">Como faço hoje</button>
-              <button class="preset" data-habito="disciplina">Com disciplina</button>
-            </div>
-            <div class="ctl">
-              <label for="in-retirada">Retirada por mês <output id="out-retirada"></output></label>
-              <input type="range" id="in-retirada" min="0" max="4000" step="50">
-            </div>
-            <div class="ctl">
-              <label for="in-pessoal">Gastos pessoais nos cartões <output id="out-pessoal"></output></label>
-              <input type="range" id="in-pessoal" min="0" max="2000" step="25">
-            </div>
-            <div class="ctl">
-              <label for="in-viagens">Viagens por mês <output id="out-viagens"></output></label>
-              <input type="range" id="in-viagens" min="0" max="1500" step="25">
-            </div>
-          </div>
-
-          <div class="ctl-group">
-            <h4>O que a máquina gera</h4>
-            <div class="ctl">
-              <label for="in-sessoes">Sessões por mês (agenda cheia) <output id="out-sessoes"></output></label>
-              <input type="range" id="in-sessoes" min="0" max="30" step="1">
-            </div>
-            <div class="ctl">
-              <label for="in-precoSessao">Preço por sessão <output id="out-precoSessao"></output></label>
-              <input type="range" id="in-precoSessao" min="100" max="1000" step="10">
-              <div class="help">Nos 3 primeiros meses a agenda enche 40%, do 4º ao 6º 70%, depois 100%.</div>
-            </div>
-          </div>
-          <button class="btn" id="reset-sim" style="width:100%">Voltar ao plano recomendado</button>
-        </aside>
-
-        <div style="display:grid;gap:20px;min-width:0">
-          <div>
-            <h3 style="margin-bottom:10px">Forma de pagamento</h3>
-            <div class="options" id="options"></div>
-          </div>
-
-          <div class="verdict" id="verdict" role="status" aria-live="polite">
-            <div class="icon" id="verdict-icon">✓</div>
-            <div><div class="t" id="verdict-title"></div><p id="verdict-text"></p></div>
-          </div>
-
-          <div class="card">
-            <h3>Linha do tempo</h3>
-            <div class="timeline" id="timeline">
-              <div class="track" id="track"></div>
-              <div class="ticks" id="ticks"></div>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>Dinheiro na conta da empresa, mês a mês</h3>
-            <div class="legend">
-              <span><i class="line" style="background:var(--gold)"></i>Saldo da conta</span>
-              <span><i class="dash"></i>Reserva de emergência ideal</span>
-              <span><i style="background:var(--s-eventual);width:3px"></i>Mês da compra</span>
-            </div>
-            <div class="chart-box"><canvas id="ch-saldo" aria-label="Saldo projetado da conta"></canvas></div>
-          </div>
-
-          <div class="grid g2">
-            <div class="card">
-              <h3>O cofrinho em out/2028</h3>
-              <p class="hint">Quanto da reserva de emergência ideal (2 meses de custos) você teria no fim do plano.</p>
-              <div class="jar-wrap">
-                <svg id="jar" width="120" height="150" viewBox="0 0 120 150" aria-hidden="true">
-                  <defs><clipPath id="jar-clip"><path d="M22 34 h76 a12 12 0 0 1 12 12 v84 a14 14 0 0 1 -14 14 h-72 a14 14 0 0 1 -14 -14 v-84 a12 12 0 0 1 12 -12z"/></clipPath></defs>
-                  <rect x="34" y="14" width="52" height="14" rx="4" fill="#D9CBA8"/>
-                  <path d="M22 34 h76 a12 12 0 0 1 12 12 v84 a14 14 0 0 1 -14 14 h-72 a14 14 0 0 1 -14 -14 v-84 a12 12 0 0 1 12 -12z" fill="#fff" stroke="#AE9253" stroke-width="2"/>
-                  <g clip-path="url(#jar-clip)"><rect id="jar-fill" x="0" y="144" width="120" height="0" fill="#AE9253" opacity=".85" style="transition:y .7s ease,height .7s ease"/></g>
-                  <text id="jar-pct" x="60" y="98" text-anchor="middle" font-family="Cinzel, serif" font-size="20" fill="#111">0%</text>
-                </svg>
-                <div class="jar-text">
-                  <div class="v num" id="jar-v"></div>
-                  <div class="l" id="jar-l"></div>
-                </div>
+        <div class="grid g2">
+          <article class="card reveal">
+            <h3>O que mais faturou</h3>
+            <p class="hint">Jan a set/2026, pelo Vagaro. O número ao lado é o preço médio.</p>
+            <div class="bars" id="servicos"></div>
+          </article>
+          <article class="card reveal">
+            <div class="card-head">
+              <div><h3>De cada $100 que entram</h3><p class="hint">Para onde vai o dinheiro.</p></div>
+              <div class="seg" role="tablist" aria-label="Comparar">
+                <button data-cem="hoje" aria-pressed="true">Hoje</button>
+                <button data-cem="plano" aria-pressed="false">No plano</button>
               </div>
             </div>
-            <div class="card">
-              <h3>Quantas sessões pagam a parcela</h3>
-              <p class="hint" id="sess-hint"></p>
-              <div class="sessions" id="sessions"></div>
-              <div class="mini" id="mini"></div>
+            <div class="cem" id="cem"></div>
+            <div class="cem-legend" id="cem-legend"></div>
+            <p class="callout" id="cem-nota"></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= MÁQUINA OU CASA ======================= -->
+    <section class="sec dark" id="historia">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="num-badge">2</span>
+          <div><h2>Máquina ou casa?</h2>
+          <p>A história em cinco passos. Aperte o play ou clique em cada passo.</p></div>
+        </div>
+        <div class="story reveal">
+          <div class="story-steps">
+            <ol id="story-steps"></ol>
+            <div class="story-ctrl">
+              <button class="btn primary sm" id="story-play">▶ Ver a história</button>
+              <span class="hint light" id="story-hint">Os números seguem o plano que você montar lá embaixo.</span>
             </div>
           </div>
+          <div class="stage" id="stage" aria-live="polite"></div>
+        </div>
+        <div class="grid g3 why-house">
+          <article class="card glass reveal"><h3>A entrada da casa usa o mesmo dinheiro</h3><p>O que você juntar até julho ou vira a entrada da máquina, ou vira a entrada da casa. Não dá para fazer as duas coisas com o mesmo dinheiro.</p></article>
+          <article class="card glass reveal"><h3>O banco olha a renda declarada</h3><p>Para a hipoteca, contam as declarações de imposto. O dinheiro vivo que não passa pelo banco nem pela declaração <b>não conta</b>. A máquina aumenta a renda que aparece no papel.</p></article>
+          <article class="card glass reveal"><h3>A máquina se paga. A casa, não.</h3><p>Cada sessão na máquina traz dinheiro novo e ajuda a quitar o cartão. A hipoteca é uma conta a mais todo mês, que você paga com a renda que já tem.</p></article>
+        </div>
+      </div>
+    </section>
 
-          <div class="card soft">
-            <h3>O plano recomendado</h3>
-            <ol class="steps mt">
-              <li><b>Arrumar a casa já (nov–dez/2026).</b> Uma retirada fixa por mês, nada pessoal nos cartões da empresa, viagens com orçamento e uma conta separada só para impostos.</li>
-              <li><b>Terminar de pagar o cartão 6346</b> (~US$ 7,8 mil, US$ 1.000/mês) até ~jun/2027 e confirmar até quando vale o 0%.</li>
-              <li><b>Validar a demanda.</b> Lista de espera ou pacotes pré-vendidos e 2–3 cotações por escrito (preço, sales tax, consumível por sessão, garantia, financiamento do fabricante).</li>
-              <li><b>Comprar por volta de jun/2027 com a opção C</b> (30% de entrada + 36x). Com clientes já esperando, a opção D (100% financiado) permite antecipar sem mexer no caixa.</li>
-              <li><b>Com o contador:</b> deduzir a máquina inteira no ano da compra (Section 179), mesmo financiada.</li>
-            </ol>
+    <!-- ======================= COMO JUNTAR ======================= -->
+    <section class="sec" id="juntar">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="num-badge">3</span>
+          <div><h2>Como o dinheiro deve ser juntado</h2>
+          <p>Todo mês, o que entra é dividido em quatro potes. Cada pote tem uma conta própria e um dono.</p></div>
+        </div>
+        <div class="card reveal potes-card">
+          <div class="card-head">
+            <div><h3 id="potes-titulo">Um mês normal</h3><p class="hint" id="potes-sub"></p></div>
+            <div class="seg" role="tablist" aria-label="Período">
+              <button data-pote="2026" aria-pressed="true">Nov–dez/2026</button>
+              <button data-pote="2027" aria-pressed="false">Jan–jul/2027</button>
+            </div>
+          </div>
+          <div class="entra" id="entra"></div>
+          <div class="potes" id="potes"></div>
+        </div>
+        <h3 class="mini-title reveal">As regras que fazem funcionar</h3>
+        <div class="grid g-rules">
+          <article class="rule reveal"><span class="ico">①</span><h4>Deposite o dinheiro vivo</h4><p>Ele é receita: entra no imposto e na renda que o banco vai olhar para a casa. Fora do banco, ele some sem a gente ver.</p></article>
+          <article class="rule reveal"><span class="ico">②</span><h4>Separe no começo do mês</h4><p>No dia 5, passe o valor do mês para a conta da máquina e a reserva para a conta de impostos. O que sobra na conta da clínica é para a clínica.</p></article>
+          <article class="rule reveal"><span class="ico">③</span><h4>Pessoal só nos seus $5 mil</h4><p>Nada pessoal nos cartões da empresa. Os $5 mil por mês são seus e cobrem tudo da sua vida.</p></article>
+          <article class="rule reveal"><span class="ico">④</span><h4>O 6346 no mínimo</h4><p>Enquanto ele estiver a 0%, pague só o mínimo. É dívida de graça. O dinheiro rende mais virando entrada da máquina.</p></article>
+          <article class="rule reveal"><span class="ico">⑤</span><h4>Mês fraco? Corte antes</h4><p>Se a agenda cair, corte outro gasto antes de mexer no pote da máquina. Ele só sai em julho.</p></article>
+          <article class="rule reveal"><span class="ico">⑥</span><h4>Nenhuma compra grande</h4><p>Estoque só conforme a agenda. A compra de $15 mil de produto em maio, sozinha, equivale a seis meses de pote.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= ECONOMIAS ======================= -->
+    <section class="sec soft" id="economias">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="num-badge">4</span>
+          <div><h2>Revisei as economias que eu tinha proposto</h2>
+          <p>Conferi linha por linha se o corte é possível de verdade. Alguns estavam apertados demais e eu afrouxei. Você pode mudar qualquer valor: o plano recalcula na hora.</p></div>
+        </div>
+        <div class="eco-sum reveal" id="eco-sum"></div>
+        <div class="eco-list" id="eco-list"></div>
+        <div class="eco-foot">
+          <button class="btn ghost sm" id="eco-reset">Voltar ao que eu propus</button>
+          <span class="hint">Suas mudanças ficam salvas neste navegador.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= PLANO ======================= -->
+    <section class="sec" id="plano">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="num-badge">5</span>
+          <div><h2>Monte o seu plano</h2>
+          <p>Ajuste do seu jeito e aperte o botão. Comecei com o que eu acho mais seguro.</p></div>
+        </div>
+        <div class="plan">
+          <aside class="controls card reveal" id="controls">
+            <div class="ctl">
+              <label for="in-retirada">Quanto você precisa por mês <output id="out-retirada"></output></label>
+              <input type="range" id="in-retirada" min="3000" max="7000" step="100">
+              <p class="help">Já contando o dinheiro vivo que você fica.</p>
+            </div>
+            <div class="ctl row">
+              <span class="lbl">Contar o dinheiro vivo como receita</span>
+              <button class="toggle" data-tg="contarDinheiro" aria-pressed="true">Sim</button>
+            </div>
+            <div class="ctl">
+              <span class="lbl">Quanto guardar por mês</span>
+              <div class="seg full">
+                <button data-guardar="auto" aria-pressed="true">Tudo o que sobrar</button>
+                <button data-guardar="fixo" aria-pressed="false">Um valor fixo</button>
+              </div>
+              <div class="sub" id="guardar-fixo-box" hidden>
+                <label for="in-guardarFixo">Valor fixo por mês <output id="out-guardarFixo"></output></label>
+                <input type="range" id="in-guardarFixo" min="0" max="5000" step="50">
+              </div>
+            </div>
+            <div class="ctl">
+              <label for="in-extraPessoal">Dinheiro seu a mais, por mês <output id="out-extraPessoal"></output></label>
+              <input type="range" id="in-extraPessoal" min="0" max="2000" step="50">
+              <p class="help">Se sobrar dos seus $5 mil, pode entrar aqui.</p>
+            </div>
+            <div class="ctl">
+              <label for="in-prevenda">Pré-venda de pacotes <output id="out-prevenda"></output></label>
+              <input type="range" id="in-prevenda" min="0" max="25000" step="500">
+              <p class="help" id="help-prevenda"></p>
+            </div>
+            <div class="ctl">
+              <label for="in-receitaExtra">Receita a mais por mês <output id="out-receitaExtra"></output></label>
+              <input type="range" id="in-receitaExtra" min="0" max="4000" step="100">
+            </div>
+            <div class="ctl">
+              <label for="in-compra">Quando comprar</label>
+              <select id="in-compra">
+                <option value="2027-6">junho de 2027</option>
+                <option value="2027-7" selected>julho de 2027</option>
+                <option value="2027-8">agosto de 2027</option>
+                <option value="2027-9">setembro de 2027</option>
+                <option value="2027-12">dezembro de 2027</option>
+              </select>
+            </div>
+            <div class="ctl">
+              <span class="lbl">Sessões na máquina</span>
+              <div class="seg full" id="cen">
+                <button data-cen="Pessimista">Devagar</button>
+                <button data-cen="Realista" aria-pressed="true">Realista</button>
+                <button data-cen="Otimista">Bombando</button>
+              </div>
+              <p class="help" id="help-cen"></p>
+            </div>
+            <details class="more">
+              <summary>Mais opções</summary>
+              <div class="ctl row"><span class="lbl">Section 179 (contador confirma)</span><button class="toggle" data-tg="s179" aria-pressed="true">Sim</button></div>
+              <div class="ctl row"><span class="lbl">6346 só no mínimo</span><button class="toggle" data-tg="min6346" aria-pressed="true">Sim</button></div>
+              <div class="ctl">
+                <label for="in-apr">Juros do cartão ao ano <output id="out-apr"></output></label>
+                <input type="range" id="in-apr" min="0" max="30" step="1">
+              </div>
+              <div class="ctl">
+                <label for="in-valor">Preço final da máquina <output id="out-valor"></output></label>
+                <input type="range" id="in-valor" min="40000" max="80000" step="1000">
+              </div>
+              <button class="btn ghost sm" id="plano-reset">Voltar ao padrão</button>
+            </details>
+            <button class="btn primary big" id="gerar">✦ Gerar meu plano</button>
+          </aside>
+
+          <div class="result" id="result">
+            <div class="result-empty card reveal" id="result-empty">
+              <div class="jar-mini" aria-hidden="true"></div>
+              <h3>Seu plano aparece aqui</h3>
+              <p>Ajuste ao lado e aperte <b>Gerar meu plano</b>. Mostro quanto guardar em cada mês, quanto vai para o cartão e quando tudo fica pago.</p>
+            </div>
+            <div class="result-full" id="result-full" hidden>
+              <div class="res-top card">
+                <div class="jar-wrap" id="jar"></div>
+                <div class="res-kpis">
+                  <div class="verdict" id="verdict"></div>
+                  <div class="kpis small" id="res-kpis"></div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-head"><div><h3>Quanto guardar em cada mês</h3><p class="hint" id="meses-hint"></p></div>
+                <button class="btn ghost sm" id="imprimir">Salvar em PDF</button></div>
+                <div class="months" id="months"></div>
+              </div>
+              <div class="card">
+                <h3>Depois da compra: o cartão zerando</h3>
+                <p class="hint" id="cartao-hint"></p>
+                <div class="chart-box"><canvas id="ch-cartao" aria-label="Saldo do cartão depois da compra"></canvas></div>
+              </div>
+              <div class="card">
+                <h3>O passo a passo</h3>
+                <ol class="steps" id="steps"></ol>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ================= LANÇAMENTOS ================= -->
-    <section class="page" id="page-lancamentos" hidden>
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">Detalhe</span>
-          <h2>Todos os lançamentos</h2>
-          <p>Cada transação como foi lançada no QuickBooks, já no grupo que o painel usa.</p>
+    <!-- ======================= CONTAS ======================= -->
+    <section class="sec soft" id="contas">
+      <div class="wrap narrow">
+        <div class="sec-head reveal">
+          <span class="num-badge">6</span>
+          <div><h2>Como eu fiz as contas</h2>
+          <p>Para você (e o contador) conferirem de onde sai cada número.</p></div>
         </div>
+        <div class="acc reveal" id="contas-acc"></div>
       </div>
-      <div class="card">
-        <div class="filters">
-          <input type="search" id="f-busca" placeholder="Buscar fornecedor ou descrição…" aria-label="Buscar">
-          <select id="f-conta" aria-label="Conta"></select>
-          <select id="f-grupo" aria-label="Grupo"></select>
-          <select id="f-mes" aria-label="Mês"></select>
+    </section>
+
+    <!-- ======================= PERGUNTAS ======================= -->
+    <section class="sec" id="perguntas">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="num-badge">7</span>
+          <div><h2>Perguntas</h2>
+          <p>À esquerda, as dúvidas que imagino que você vai ter. À direita, o que eu preciso que você me responda para fechar o plano.</p></div>
         </div>
-        <p class="hint" id="f-resumo"></p>
-        <div class="table-wrap"><table id="tb-tx"></table></div>
-        <div class="pager"><button class="btn small" id="pg-prev">Anterior</button><span id="pg-info"></span><button class="btn small" id="pg-next">Próxima</button></div>
+        <div class="grid g2 qa">
+          <div class="reveal">
+            <h3 class="mini-title">Suas dúvidas</h3>
+            <div class="acc" id="faq"></div>
+          </div>
+          <div class="card reveal ask">
+            <h3>Me responde?</h3>
+            <p class="hint" id="ask-nota">O que você escrever fica salvo.</p>
+            <form id="ask-form"></form>
+            <div class="ask-actions">
+              <button class="btn primary sm" id="ask-whats" type="button">Mandar pelo WhatsApp</button>
+              <button class="btn ghost sm" id="ask-copy" type="button">Copiar respostas</button>
+              <span class="hint" id="ask-status" role="status"></span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer id="footer"></footer>
+  <footer class="site-foot">
+    <img src="logo.png" alt="Rosele Aesthetics" width="160" height="33">
+    <p>Feito pela Karina para a Rosele · dados de janeiro a setembro de 2026 (banco, cartões e Vagaro).<br>Um planejamento, não uma recomendação de investimento. Os pontos de imposto precisam do ok do contador.</p>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="data.js"></script>
+  <script src="vagaro.js"></script>
+  <script src="modelo.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
