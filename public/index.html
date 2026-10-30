@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="topbar">Feito pela Karina, só para você · atualizado em 24/10/2026</div>
+  <div class="topbar">Feito pela Karina, só para você · atualizado em 30/10/2026</div>
   <header class="site">
     <div class="header-in">
       <a class="brand" href="#inicio" aria-label="Rosele Aesthetics, início">
@@ -24,6 +24,8 @@
         <a href="#juntar">Como juntar</a>
         <a href="#economias">As economias</a>
         <a href="#plano" class="cta">Gerar meu plano</a>
+        <a href="#previsao">Mês a mês</a>
+        <a href="#natal">Natal</a>
         <a href="#perguntas">Perguntas</a>
       </nav>
     </div>
@@ -37,7 +39,7 @@
         <div class="hero-text reveal">
           <span class="eyebrow">Rosele,</span>
           <h1>Montei este espaço para a gente olhar o seu dinheiro juntas</h1>
-          <p class="lead">Juntei o banco, os cartões e agora também o Vagaro. Descobri uma coisa que muda o plano inteiro: <b>uma parte boa do que você recebe chega em dinheiro vivo e não passa pelo banco.</b> Contando esse dinheiro, a máquina cabe, mesmo com os $5 mil por mês que você precisa para viver.</p>
+          <p class="lead">Juntei o banco, os cartões e agora também o Vagaro. Descobri uma coisa que muda o plano inteiro: <b>uma parte boa do que você recebe chega em dinheiro vivo e não passa pelo banco.</b> Contando esse dinheiro, a máquina cabe, mesmo com os $5 mil por mês que você precisa para viver. E agora os <b>$18 mil que o Alex contou</b> já entraram no plano.</p>
           <p class="sign">Com carinho, <span>Karina</span></p>
           <div class="hero-actions">
             <a class="btn primary" href="#plano">Gerar meu plano</a>
@@ -153,9 +155,10 @@
           <div class="entra" id="entra"></div>
           <div class="potes" id="potes"></div>
         </div>
+        <div class="card reveal cofrinho" id="cofrinho"></div>
         <h3 class="mini-title reveal">As regras que fazem funcionar</h3>
         <div class="grid g-rules">
-          <article class="rule reveal"><span class="ico">①</span><h4>Deposite o dinheiro vivo</h4><p>Ele é receita: entra no imposto e na renda que o banco vai olhar para a casa. Fora do banco, ele some sem a gente ver.</p></article>
+          <article class="rule reveal"><span class="ico">①</span><h4>Defina a data de depositar</h4><p>Você quer esperar o fim do ano para depositar os $18 mil. Combine essa data com o contador. Depositado ou não, esse dinheiro é receita e entra na declaração. Fora do banco, ele some sem a gente ver.</p></article>
           <article class="rule reveal"><span class="ico">②</span><h4>Separe no começo do mês</h4><p>No dia 5, passe o valor do mês para a conta da máquina e a reserva para a conta de impostos. O que sobra na conta da clínica é para a clínica.</p></article>
           <article class="rule reveal"><span class="ico">③</span><h4>Pessoal só nos seus $5 mil</h4><p>Nada pessoal nos cartões da empresa. Os $5 mil por mês são seus e cobrem tudo da sua vida.</p></article>
           <article class="rule reveal"><span class="ico">④</span><h4>O 6346 no mínimo</h4><p>Enquanto ele estiver a 0%, pague só o mínimo. É dívida de graça. O dinheiro rende mais virando entrada da máquina.</p></article>
@@ -216,6 +219,11 @@
               <label for="in-extraPessoal">Dinheiro seu a mais, por mês <output id="out-extraPessoal"></output></label>
               <input type="range" id="in-extraPessoal" min="0" max="2000" step="50">
               <p class="help">Se sobrar dos seus $5 mil, pode entrar aqui.</p>
+            </div>
+            <div class="ctl">
+              <label for="in-dinheiroGuardado">Dinheiro já guardado <output id="out-dinheiroGuardado"></output></label>
+              <input type="range" id="in-dinheiroGuardado" min="0" max="35000" step="500">
+              <p class="help">Os $18 mil que o Alex contou. Mude se parte for para a casa ou para o imposto.</p>
             </div>
             <div class="ctl">
               <label for="in-prevenda">Pré-venda de pacotes <output id="out-prevenda"></output></label>
@@ -296,11 +304,51 @@
       </div>
     </section>
 
+    <!-- ======================= PREVISÃO ======================= -->
+    <section class="sec soft" id="previsao">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="num-badge">6</span>
+          <div><h2>A previsão mês a mês</h2>
+          <p>O que deve entrar, o que deve sair e quanto vai para a máquina, de novembro até a compra. Ela segue o plano que você montou acima. Novembro é o seu melhor mês, e janeiro cai.</p></div>
+        </div>
+        <div class="kpis reveal" id="prev-kpis"></div>
+        <article class="card reveal prev-chart">
+          <h3>O pote da máquina crescendo</h3>
+          <p class="hint">Total guardado no fim de cada mês.</p>
+          <div class="chart-box"><canvas id="ch-previsao" aria-label="Total guardado para a máquina a cada mês"></canvas></div>
+        </article>
+        <article class="card reveal">
+          <h3>Mês por mês</h3>
+          <div class="tabela-box"><table class="tabela" id="prev-tabela"></table></div>
+          <p class="callout" id="prev-nota"></p>
+          <p class="hint"><a href="previsao.html">Ver como apresentação</a> · com o plano padrão, sem as mudanças que você fez acima.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ======================= NATAL ======================= -->
+    <section class="sec" id="natal">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="num-badge">7</span>
+          <div><h2>A promoção de fim de ano</h2>
+          <p>Gift card com 15% de desconto na semana do Thanksgiving e raspadinha em dezembro para quem gastar a partir de $400. Fiz a conta em três cenários. <b>O ganho não entrou no plano da máquina</b>: se vier, é um extra.</p></div>
+        </div>
+        <div class="natal-grid reveal" id="natal-cards"></div>
+        <article class="card reveal">
+          <h3>O que entrou na conta</h3>
+          <ul class="natal-lista" id="natal-premissas"></ul>
+          <p class="callout">Todo mundo que participa ganha algum prêmio, então não vira sorteio. Os custos dos prêmios são estimativas: quando você escolher, eu troco pelos valores reais.</p>
+        </article>
+      </div>
+    </section>
+
     <!-- ======================= CONTAS ======================= -->
     <section class="sec soft" id="contas">
       <div class="wrap narrow">
         <div class="sec-head reveal">
-          <span class="num-badge">6</span>
+          <span class="num-badge">8</span>
           <div><h2>Como eu fiz as contas</h2>
           <p>Para você (e o contador) conferirem de onde sai cada número.</p></div>
         </div>
@@ -312,7 +360,7 @@
     <section class="sec" id="perguntas">
       <div class="wrap">
         <div class="sec-head reveal">
-          <span class="num-badge">7</span>
+          <span class="num-badge">9</span>
           <div><h2>Perguntas</h2>
           <p>À esquerda, as dúvidas que imagino que você vai ter. À direita, o que eu preciso que você me responda para fechar o plano.</p></div>
         </div>

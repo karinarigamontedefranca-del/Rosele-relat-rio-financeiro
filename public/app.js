@@ -173,7 +173,7 @@
       },
     });
     quandoVisivel("#ch-receb", mk);
-    $("#callout-dinheiro").innerHTML = `De janeiro a setembro, entraram <b>${usd(tot("dinheiro"))} em dinheiro vivo</b> e foram depositados só <b>${usd(sum(V.depositadoATM.slice(0, mesesB.length)))}</b>. É por isso que o banco mostra menos do que você fatura. E é por isso também que eu insisto: deposite.`;
+    $("#callout-dinheiro").innerHTML = `De janeiro a setembro, entraram <b>${usd(tot("dinheiro"))} em dinheiro vivo</b> e foram depositados só <b>${usd(sum(V.depositadoATM.slice(0, mesesB.length)))}</b>. Até 24/10, foram <b>$35.334</b> em dinheiro e <b>$3.160</b> depositados. O Alex contou <b>$18 mil</b> em casa, e ainda não sabemos onde está o resto.`;
 
     const formas = [["Dinheiro vivo", tot("dinheiro"), COR.dinheiro], ["Cartão", tot("cartao"), COR.cartao], ["Cherry, Zelle e outros", tot("outros"), COR.outros]];
     const ft = sum(formas.map(f => f[1]));
@@ -240,7 +240,7 @@
   function storyPassos(d) {
     return [
       { t: "Hoje", w: "out/2026", p: `Entram uns ${usdK(d.r.hoje.rec)} por mês, mas sai tudo e mais um pouco: falta ${usd(-d.r.hoje.sobra)} por mês. Nada fica guardado.` },
-      { t: "Juntar", w: `nov/2026 → ${d.compra}`, p: `Com o orçamento novo, a Section 179 e a pré-venda, o pote da máquina chega a ${usd(d.p.guardado)}.` },
+      { t: "Juntar", w: `nov/2026 → ${d.compra}`, p: `Com os ${usd(S.dinheiroGuardado)} que você já tem, o orçamento novo, a Section 179 e a pré-venda, o pote da máquina chega a ${usd(d.p.guardado)}.` },
       { t: "Comprar", w: d.compra, p: `${usd(d.p.entrada)} de entrada e ${usd(d.p.cartao)} no cartão. O verão é mais fraco, e você aproveita para treinar.` },
       { t: "A máquina paga o cartão", w: `${d.compra} → ${d.zera}`, p: d.q && !d.q.nunca ? `Cada sessão vai direto para o cartão. No cenário que você escolheu, ele zera em ${d.zera}, com ${usd(d.q.juros)} de juros.` : d.q ? "Nesse cenário o cartão não zera. Vale mudar o plano lá embaixo." : "Não sobra nada no cartão." },
       { t: "A casa", w: `a partir de ${d.casa}`, p: "Com a máquina paga e a renda maior aparecendo na declaração de 2027, você chega ao banco com o que ele quer ver para a hipoteca." },
@@ -400,7 +400,7 @@
       { nm: "Clínica", v: m.desp, c: "#AE9253", ds: "Produtos, equipe, aluguel, anúncios. Fica na conta 6216." },
       { nm: "Impostos", v: m.imposto, c: "#8E8A85", ds: m.imposto ? "28% do lucro, numa conta só para isso." : "Em 2027 a máquina cobre. Confirmar com o contador." },
       { nm: "Você", v: m.retirada, c: "#383838", ds: "Seus $5 mil. Inclui o dinheiro vivo que você fica." },
-      { nm: "Máquina", v: maq, c: maq < 0 ? "#A23B2E" : "#3B7D4F", ds: maq < 0 ? `Falta ${usd(-maq)} no mês.` : `Já descontado o mínimo do 6346 (${usd(min6)}).`, destaque: true },
+      { nm: "Máquina", v: maq, c: maq < 0 ? "#A23B2E" : "#3B7D4F", ds: maq < 0 ? `Falta ${usd(-maq)} num mês médio.` : `Num mês médio, já descontado o mínimo do 6346 (${usd(min6)}).`, destaque: true },
     ];
     const mx = Math.max(...potes.map(p => Math.abs(p.v)));
     $("#potes").innerHTML = potes.map(p => `<div class="pote${p.destaque ? " destaque" : ""}"><div class="jarro"><div class="liq" style="background:${p.c}" data-h="${Math.max(3, Math.abs(p.v) / mx * 92)}"></div></div><div class="val">${usd(p.v)}</div><div class="nm">${p.nm}</div><div class="ds">${p.ds}</div></div>`).join("");
@@ -448,7 +448,7 @@
   // ------------------------------------------------------------ 6. plano
   const CTL = {
     retirada: { out: usd }, guardarFixo: { out: usd }, extraPessoal: { out: usd }, prevenda: { out: usd },
-    receitaExtra: { out: v => "+" + usd(v) }, apr: { out: v => Math.round(v * 100) + "%", get: v => v / 100, set: v => Math.round(v * 100) },
+    receitaExtra: { out: v => "+" + usd(v) }, dinheiroGuardado: { out: usd }, apr: { out: v => Math.round(v * 100) + "%", get: v => v / 100, set: v => Math.round(v * 100) },
     valor: { out: usd },
   };
   let gerado = store.get("rosele_plano_gerado", false);
@@ -527,7 +527,7 @@
     $("#res-kpis").innerHTML = kp.map(([l, val]) => `<div class="kpi in"><div class="l">${l}</div><div class="v" data-n="${typeof val === "number" ? val : ""}">${typeof val === "number" ? usd(val) : val}</div></div>`).join("");
     if (anim) $$("#res-kpis .v[data-n]").forEach(el => el.dataset.n !== "" && animarNumero(el, 0, +el.dataset.n, usd, 1400));
 
-    const ini = `<div class="mcard" style="animation-delay:0s"><div class="mm">Começo</div><div class="mv">${usd(p.inicio)}</div><div class="mt">Passar do caixa da 6216 para a conta da máquina. Ficam ${usd(M.BASE.reservaMin)} de reserva.</div></div>`;
+    const ini = `<div class="mcard" style="animation-delay:0s"><div class="mm">Começo</div><div class="mv">${usd(p.inicio)}</div><div class="mt">${usd(S.dinheiroGuardado)} em dinheiro${p.caixa < 0 ? `, menos ${usd(-p.caixa)} para completar a reserva de ${usd(M.BASE.reservaMin)} na 6216` : ` + ${usd(p.caixa)} do caixa da 6216`}.</div></div>`;
     $("#months").innerHTML = ini + p.linhas.map((l, i) => {
       const cls = l.dep < 0 ? "neg" : l.pre ? "pre" : "";
       const det = [l.guardar >= 0 ? `sobra ${usd(l.guardar)}` : `falta ${usd(-l.guardar)}`, l.pre ? `pré-venda ${usd(l.pre)}` : "", l.extra ? `seu ${usd(l.extra)}` : "", l.s179 ? "imposto → máquina" : "", l.folga < -0.5 ? `<b style="color:var(--bad)">faltam ${usd(-l.folga)}</b>` : l.folga > 0.5 ? `folga ${usd(l.folga)}` : ""].filter(Boolean).join(" · ");
@@ -557,9 +557,9 @@
 
     const l = p.linhas, l27 = l.find(x => x.y === 2027) || l[0];
     $("#steps").innerHTML = [
-      `<b>Novembro de 2026</b>Abrir duas contas na empresa: uma só da máquina e outra só de impostos. Passar ${usd(p.inicio)} do caixa para a conta da máquina. Começar a depositar todo o dinheiro vivo.`,
-      `<b>Dezembro de 2026</b>Com o contador: o imposto de 2026, a Section 179 na compra em ${S.compraAno} e o dinheiro vivo de 2026. Com o Chase: até quando vale o 0% do 6346.`,
-      `<b>Janeiro de 2027 em diante</b>Todo dia 5, passar uns ${usd(l27.dep)} para a conta da máquina. Pedir 2 ou 3 cotações com preço final (imposto, frete, treinamento) e perguntar a taxa para pagar no cartão.`,
+      `<b>Novembro de 2026</b>A poupança da máquina já está aberta. Falta abrir a conta de impostos. Pagar as faturas do Amex e do 2378 e completar a reserva da 6216.`,
+      `<b>Dezembro de 2026</b>Com o contador: o dinheiro vivo de 2026, quando depositar os ${usd(S.dinheiroGuardado)}, o imposto de 2026 e a Section 179 na compra em ${S.compraAno}. Com o Chase: até quando vale o 0% do 6346.`,
+      `<b>Janeiro de 2027 em diante</b>Todo dia 5, passar para a conta da máquina o valor do mês na previsão. Pedir 2 ou 3 cotações com preço final (imposto, frete, treinamento) e perguntar a taxa para pagar no cartão.`,
       S.prevenda ? `<b>Três meses antes da compra</b>Abrir a pré-venda: pacotes de 3 sessões com 10% de desconto, metade paga na reserva.` : "",
       `<b>${maLongo(S.compraMes, S.compraAno)}</b>Comprar: ${usd(p.entrada)} de entrada${p.cartao > 0.5 ? ` e ${usd(p.cartao)} no cartão. Confirmar antes o limite do cartão` : ""}.`,
       q ? `<b>Depois da compra</b>Tudo o que sobra vai para o cartão${q.nunca ? "" : `, até ${maLongo(q.m, q.y)}`}. Depois, o 6346. Se um banco aprovar um empréstimo mais barato, trocar a dívida do cartão por ele.` : "",
@@ -578,14 +578,60 @@
       ["A Section 179", `<p>Comprando a máquina em ${S.compraAno}, a empresa pode deduzir o valor dela do lucro daquele ano. Com uma máquina de ${usd(S.valor)}, isso deve zerar o imposto da empresa em ${S.compraAno}. Por isso, de janeiro até a compra, o que iria para o imposto vai para a máquina. <b>Precisa do ok do contador antes.</b></p>`],
       ["A pré-venda", `<p>Clientes fiéis compram um pacote de 3 sessões de $550 com 10% de desconto e pagam metade nos três meses antes da compra. A outra metade entra quando elas fizerem as sessões. Na conta do cartão, desconto essas sessões já pagas.</p>`],
       ["O cartão e os cenários de sessões", `<p>Juros de ${Math.round(S.apr * 100)}% ao ano (${(S.apr / 12 * 100).toFixed(1)}% ao mês). Depois da compra, todo mês entram as sessões da máquina menos $250 de manutenção, mais a sobra da clínica.</p><div class="formula">devagar: 4 sessões × $550 · realista: 7 × $850 · bombando: 10 × $1.200<br>verão: 30–60% de um mês normal · inverno: até 130%</div><p>A partir do ano seguinte à compra, a renda da máquina também paga 28% de imposto.</p>`],
-      ["O que não entrou na conta", `<p>Preço exato da máquina (usei ${usd(S.valor)} como preço final), a taxa do vendedor para receber no cartão (costuma ser ~3%), aumento de preço dos produtos e gastos com a casa. Se algum desses mudar, é só mexer no plano.</p>`],
+      ["Os saldos de partida", `<p>Em 30/10, a conta 6216 tinha ${usd(B.saldoBanco6216)}. Faltam pagar ${usd(B.faturaGold)} do Amex e ${usd(B.fatura2378)} do cartão 2378, então sobram ${usd(B.saldo6216)}. O pote começa com os ${usd(S.dinheiroGuardado)} em dinheiro${r.p.caixa < 0 ? `, menos ${usd(-r.p.caixa)} para a reserva voltar a ${usd(B.reservaMin)}` : ""}.</p>`],
+      ["Meses fortes e fracos", `<p>Novembro vale 120% de um mês médio, dezembro 110%, janeiro 80% e fevereiro 90%. Os outros meses valem 100%. É uma estimativa baseada no que você me contou e no Vagaro.</p>`],
+      ["O que não entrou na conta", `<p>Preço exato da máquina (usei ${usd(S.valor)} como preço final), a taxa do vendedor para receber no cartão (costuma ser ~3%), aumento de preço dos produtos, gastos com a casa, o ganho da promoção de fim de ano e um eventual imposto sobre o dinheiro vivo de 2026. Os $18 mil entraram inteiros: o contador precisa confirmar se parte deles fica para o imposto.</p>`],
     ];
     $("#contas-acc").innerHTML = itens.map(([t, b], i) => `<details${i === 0 ? " open" : ""}><summary>${t}</summary><div class="body">${b}</div></details>`).join("");
   }
 
+  // ------------------------------------------------------------ previsão mês a mês, cofrinho e Natal
+  function renderPrevisao() {
+    const r = calc(), p = r.p, L = p.linhas;
+    const fracos = L.filter(l => l.dep < -0.5);
+    $("#prev-kpis").innerHTML = [
+      ["Começa com", usd(p.inicio), "no pote da máquina"],
+      ["Entram no período", usd(sum(L.map(l => l.rec))), `${L.length} meses`],
+      ["Vão para a máquina", usd(p.guardado - p.inicio), "somando tudo, com a pré-venda"],
+      ["Chega na compra com", usd(p.guardado), p.cartao > 0.5 ? `${usd(p.cartao)} no cartão` : "dá para comprar à vista"],
+    ].map(([l, v, d]) => `<div class="kpi in"><div class="l">${l}</div><div class="v">${v}</div><div class="d">${d}</div></div>`).join("");
+    const cab = ["Mês", "Entra", "Clínica", "Imposto", "Você", "6346", "Uma vez só", "Pré-venda", "Para a máquina", "Total guardado"];
+    const lin = l => `<tr class="${l.dep < -0.5 ? "neg" : ""}"><th scope="row">${ma(l.m, l.y)}</th>${[l.rec, -l.desp, -l.imposto, -l.retirada, -l.p6, l.unico ? -l.unico.valor : 0, l.pre].map(v => `<td>${Math.abs(v) < 0.5 ? "—" : usd(v)}</td>`).join("")}<td class="forte">${usd(l.dep)}</td><td>${usd(l.guard)}</td></tr>`;
+    $("#prev-tabela").innerHTML = `<thead><tr>${cab.map(c => `<th scope="col">${c}</th>`).join("")}</tr></thead><tbody>${L.map(lin).join("")}</tbody>`;
+    const nomes = fracos.map(l => ma(l.m, l.y)).join(", ");
+    $("#prev-nota").innerHTML = (fracos.length ? `Em <b>${nomes}</b>, o mês fecha negativo: cubra com o que sobrou em novembro e dezembro, sem mexer na reserva. ` : "") + "Essa previsão usa os $18 mil e a pré-venda dos três meses antes da compra. O valor do curso de novembro ainda é uma estimativa.";
+    chart("ch-previsao", {
+      type: "bar",
+      data: { labels: L.map(l => ma(l.m, l.y)), datasets: [{ label: "Guardado", data: L.map(l => Math.round(l.guard)), backgroundColor: "#AE9253", borderRadius: 6 }] },
+      options: { maintainAspectRatio: false, scales: { x: xPlain, y: { ...yMoney, min: 0 } }, plugins: { tooltip: { callbacks: { label: c => ` ${usd(c.raw)}` } } } },
+    });
+  }
+
+  function renderCofrinho() {
+    const C = M.COFRINHO, pct = Math.min(100, C.valor / C.meta * 100);
+    $("#cofrinho").innerHTML = `<div class="card-head"><div><h3>O cofrinho da máquina</h3><p class="hint">Atualizado por mim em ${C.em}.</p></div><div class="cof-valor">${usd(C.valor)} <span>de ${usd(C.meta)}</span></div></div>
+      <div class="cof-barra" role="img" aria-label="${Math.round(pct)}% da meta guardados"><span style="width:${pct}%"></span></div>
+      <p class="hint">${Math.round(pct)}% da máquina, ${C.onde}. Faltam ${usd(C.meta - C.valor)}.</p>`;
+  }
+
+  function renderNatal() {
+    const P = M.NATAL_PREMISSAS, N = M.natal();
+    $("#natal-cards").innerHTML = N.map((n, i) => `<article class="card natal-card${i === 1 ? " destaque" : ""}">
+      <h3>${n.nome}</h3><div class="natal-ganho">${usd(n.ganho)}</div><p class="hint">de ganho novo depois dos custos</p>
+      <dl><dt>Gift cards vendidos</dt><dd>${n.gc}</dd><dt>Dinheiro adiantado</dt><dd>${usd(n.gcCaixa)}</dd><dt>Raspadinhas</dt><dd>${n.cartoes}</dd><dt>Clientes que sobem para $400</dt><dd>${n.sobe}</dd><dt>Voltam com o voucher</dt><dd>${n.voltam.toFixed(1).replace(".", ",")}</dd><dt>Custo dos prêmios</dt><dd>${usd(n.custo)}</dd></dl>
+    </article>`).join("");
+    $("#natal-premissas").innerHTML = [
+      `Gift card médio de ${usd(P.gcValor)}, com ${P.gcDesconto * 100}% de desconto. Só ${P.gcNovo * 100}% conta como venda nova: o resto é a cliente pagando antes o que já faria.`,
+      `Prêmios: ${P.brindeB12.pct * 100}% B12 (custo ${usd(P.brindeB12.custo)}), ${P.brindeCreme.pct * 100}% creme (${usd(P.brindeCreme.custo)}) e ${P.voucher.pct * 100}% voucher de ${P.voucher.desconto * 100}% para o próximo procedimento.`,
+      `Atendimentos de $400 ou mais: 27 em setembro e 21 até 24/10. Ticket médio deles: ${usd(P.ticket)}.`,
+      `Quem sobe de valor para ganhar a raspadinha gasta ${usd(P.upsell)} a mais. Produto custa ${P.prodPct * 100}% da venda.`,
+    ].map(t => `<li>${t}</li>`).join("");
+  }
+
   const FAQ = [
     ["Por que a máquina antes da casa?", "Porque a máquina traz renda nova, e é a renda declarada que o banco olha para aprovar a hipoteca. Com a máquina paga, você chega ao banco com mais renda e menos dívida. Se fosse a casa primeiro, o mesmo dinheiro viraria entrada da casa e a hipoteca seria mais uma conta todo mês, sem renda nova para pagar."],
-    ["Por que eu deveria depositar o dinheiro vivo?", "Por três motivos. Ele é receita e precisa entrar no imposto. Ele aumenta a renda que aparece na declaração, e é isso que conta para a hipoteca. E, fora do banco, ele some sem a gente conseguir ver para onde foi."],
+    ["Por que depositar o dinheiro vivo?", "Por três motivos. Ele é receita e precisa entrar na declaração, mesmo que fique fora do banco. Ele aumenta a renda que conta para a hipoteca. E, fora do banco, ele some sem a gente conseguir ver para onde foi. A data certa você combina com o contador."],
+    ["Os $18 mil já estão no plano?", "Sim. Entraram inteiros no pote da máquina, como você pediu. Se você decidir usar esse dinheiro para a casa, ou se o contador disser que parte fica para o imposto, é só mudar o valor em “Dinheiro já guardado”."],
     ["Os $5 mil por mês incluem o dinheiro vivo?", "No plano, sim. Se você já fica com o dinheiro vivo, completa os $5 mil com uma transferência da conta da empresa. Se a sua realidade for outra, me conta na pergunta ao lado que eu refaço."],
     ["Por que pagar só o mínimo do cartão 6346?", "Porque ele está a 0% de juros: é uma dívida de graça. O cartão onde a máquina vai entrar cobra uns 24% ao ano. Cada dólar que fica na conta da máquina, em vez de ir para o 6346, é um dólar a menos pagando 2% ao mês."],
     ["Quanto custa deixar dinheiro no cartão?", "A 24% ao ano, são 2% ao mês. Cada $10 mil no cartão custam uns $200 de juros por mês. Por isso vale guardar o máximo antes de comprar."],
@@ -594,13 +640,15 @@
     ["Posso mudar os números?", "Pode e deve. Mude as economias que você topa, quanto precisa por mês, quando quer comprar e o ritmo das sessões. O plano recalcula na hora."],
   ];
   const ASK = [
-    ["dinheiro", "O que você faz hoje com o dinheiro vivo que recebe?", "Uns $3,7 mil por mês. Paga o aluguel? Fica com você? Guarda?"],
     ["cinco", "Os $5 mil por mês já incluem esse dinheiro vivo?", ""],
     ["cotacao", "Já tem cotação da máquina?", "Valor final, com imposto, frete e treinamento."],
     ["cartao", "Em qual cartão você passaria a máquina?", "Limite e juros ao ano."],
     ["6346", "Até quando o Chase 6346 fica a 0%?", ""],
     ["prevenda", "Você topa pré-vender pacotes? Para quantas clientes?", ""],
     ["preco", "Quanto você pensa em cobrar por sessão na máquina?", ""],
+    ["curso", "Quanto custa o curso de 26 a 28/11?", "Coloquei $2.000 na previsão até você confirmar."],
+    ["cursos27", "Quanto você quer separar para cursos em 2027?", "Coloquei $600 por mês por enquanto."],
+    ["sustenta", "O plano do site é sustentável para você?", "Se não for, me diz o que pesa mais."],
     ["outra", "Alguma coisa que eu não perguntei?", ""],
   ];
   function renderPerguntas() {
@@ -626,6 +674,7 @@
     renderPotes();
     renderEcoSum();
     renderContas();
+    renderPrevisao();
     if (origem !== "story") renderStory();
     renderResultado(false);
   }
@@ -638,6 +687,9 @@
   renderPotes();
   renderEco();
   renderContas();
+  renderPrevisao();
+  renderCofrinho();
+  renderNatal();
   renderPerguntas();
   renderResultado(false);
   observar(document);

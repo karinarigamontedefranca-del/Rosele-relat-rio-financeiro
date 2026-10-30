@@ -375,3 +375,28 @@ details.more[open] { display: grid; gap: 14px; }
   .card { break-inside: avoid; box-shadow: none; }
   .mcard, .result-full.show > * { animation: none; opacity: 1; transform: none; }
 }
+
+/* previsão, cofrinho e Natal (30/10/2026) */
+.prev-chart { margin: 14px 0; }
+.tabela-box { overflow-x: auto; margin-top: 10px; }
+.tabela { width: 100%; min-width: 760px; border-collapse: collapse; font-size: .86rem; font-variant-numeric: tabular-nums; }
+.tabela th, .tabela td { padding: 9px 10px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.tabela thead th { font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.tabela th:first-child { text-align: left; }
+.tabela tbody th { font-weight: 600; color: var(--ink); }
+.tabela .forte { font-weight: 700; color: var(--good); }
+.tabela tr.neg .forte { color: var(--bad); }
+.cofrinho { margin: 18px 0 8px; }
+.cof-valor { font-family: var(--serif); font-size: 1.6rem; color: var(--ink); }
+.cof-valor span { font-family: var(--sans); font-size: .85rem; color: var(--muted); }
+.cof-barra { height: 16px; background: var(--gold-pale); border-radius: 999px; overflow: hidden; margin: 8px 0; }
+.cof-barra span { display: block; height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-deep)); border-radius: 999px; }
+.natal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 14px; }
+.natal-card.destaque { border-color: var(--gold); box-shadow: 0 8px 24px rgba(92, 74, 34, .12); }
+.natal-ganho { font-family: var(--serif); font-size: 2rem; color: var(--gold-deep); }
+.natal-card dl { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; margin: 12px 0 0; font-size: .88rem; }
+.natal-card dt { color: var(--muted); }
+.natal-card dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+.natal-lista { margin: 8px 0 0; padding-left: 18px; font-size: .92rem; }
+.natal-lista li { margin-bottom: 6px; }
+@media (max-width: 820px) { .natal-grid { grid-template-columns: 1fr; } }
